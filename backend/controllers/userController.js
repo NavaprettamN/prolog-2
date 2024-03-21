@@ -47,6 +47,10 @@ const userLogin = async (req, res) => {
     }
 }
 
+const userLogout = (req, res) => {
+    res.clearCookie('authcookie', {httpOnly: true, expires: new Date(0) }).send('cookie deleted');
+}
+
 const getUser = (req, res) => {
     const data = req.userId;
     res.json({"userId": data});
@@ -55,4 +59,5 @@ module.exports = {
     userLogin,
     userSignup,
     getUser,
+    userLogout,
 }
