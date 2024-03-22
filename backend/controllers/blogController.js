@@ -1,5 +1,6 @@
 // create blog, update blog, delete blog
 const blogData = require('../models/blogModel');
+const userData = require("../models/userModel");
 
 const createBlog = async (req, res) => {
     const {title, content, frequency, userId, lastPostedAt} = req.body;
@@ -47,9 +48,28 @@ const getUserBlog = async (req, res) => {
     }
 }
 
+const getBlogData = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const blog = await blogData.findOne({_id: id});
+        if(!blog) {
+            return res.json({message : "there is no blog"});
+        }
+        const userId = blog.userId;
+        const user = await userData.findById(userId);
+
+        res.status(200).json({blog, username: user.name });
+    }
+    catch (err) {
+        console.log("error fetching blog data : ", err);
+        res.status(500).json({message : "internal server error"});
+    }
+}
+
 module.exports = {
     createBlog, 
     updateBlog,
     getBlog,
     getUserBlog,
+    getBlogData,
 };
