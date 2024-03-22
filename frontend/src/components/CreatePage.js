@@ -1,20 +1,23 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 const CreatePage = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [frequency, setFrequency] = useState('daily'); // Set default value to 'daily'
     const navigate = useNavigate();
-
+    const auth = useAuth();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             // Send a POST request to your backend API to create the blog
-            const response = await axios.post('/createblog', {title, content, frequency});
-            if (response.ok) {
+            const response = await axios.post('http://localhost:5000/createblog', {title, content, frequency, userId : auth.userId, lastPostedAt: Date.now()}, 
+            {withCredentials: true});
+            if (response.status == 200) {
                 // Blog created successfully, redirect to the dashboard or another page
+                console.log("blog created");
                 navigate('/dashboard');
             } else {
                 // Handle error response

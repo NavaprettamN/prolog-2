@@ -6,5 +6,6 @@ const router = express.Router();
 router.post('/createblog', verifyToken, blogController.createBlog);
 router.post('/updateblog', verifyToken, blogController.updateBlog);
 router.get('/allblogs', blogController.getBlog);
+router.get('/getuserblog', verifyToken, blogController.getUserBlog);
 
 module.exports = router;

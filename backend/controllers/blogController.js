@@ -36,8 +36,20 @@ const getBlog = async (req, res) => {
     }
 }
 
+const getUserBlog = async (req, res) => {
+    try {
+        const userblogs = await blogData.find({userId: req.userId});
+        res.status(200).json(userblogs);
+    }
+    catch (err) {
+        console.log("error fetching user blogs : ", err);
+        res.status(500).json({message : "internal server error"});
+    }
+}
+
 module.exports = {
     createBlog, 
     updateBlog,
     getBlog,
+    getUserBlog,
 };

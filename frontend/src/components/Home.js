@@ -6,17 +6,29 @@ import NavBar from './NavBar';
 const Home = () => {
   
   const [blogs, setBlogs] = useState([]);
+  const [userBlogs, setUserBlogs] = useState([]);
   const auth = useAuth();
   const userId = auth.userId;
   useEffect(() => {
     // Fetch blogs when the component mounts
     getBLogs();
+    userBlog(); 
 }, []);
 
   const getBLogs = async () => {
     try {
       const res = await axios.get('http://localhost:5000/allblogs');
       setBlogs(res.data);
+    }
+    catch(err) {
+      console.log("error while fetching the blogs : ", err);
+    }
+  }
+
+  const userBlog = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/getuserblog', {withCredentials: true});
+      setUserBlogs(res.data);
     }
     catch(err) {
       console.log("error while fetching the blogs : ", err);
@@ -45,6 +57,12 @@ const Home = () => {
           <div className="w-1/4 ml-4 bg-gradient-to-br from-purple-600 to-blue-500 bg-opacity-75 rounded p-4 shadow-lg">
             <h2 className="text-2xl font-bold mb-4">Your Blogs</h2>
             {/* Display user's blogs here */}
+            {userBlogs.map(blog => (
+                <div key={blog._id} className="bg-white p-4 rounded shadow-md">
+                  <h3 className="text-xl font-semibold">{blog.title}</h3>
+                  <p className="text-gray-600">{blog.content}</p>
+                </div>
+              ))}
           </div>
         </div>
       </div>
