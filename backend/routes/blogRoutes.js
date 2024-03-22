@@ -4,7 +4,7 @@ const { verifyToken } = require('../util/verifyToken');
 const router = express.Router();
 
 router.post('/createblog', verifyToken, blogController.createBlog);
-router.post('/updateblog', verifyToken, blogController.updateBlog);
+router.put('/updateblog/:blogId',verifyToken , blogController.updateBlog);
 router.get('/allblogs', blogController.getBlog);
 router.get('/getuserblog', verifyToken, blogController.getUserBlog);
 router.get('/blog/:id', verifyToken, blogController.getBlogData);

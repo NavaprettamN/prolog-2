@@ -9,6 +9,7 @@ import Signup from './components/Signup';
 import CreatePage from './components/CreatePage';
 import ProfilePage from './components/ProfilePage';
 import BlogPage from './components/BlogPage';
+import EditBlogPage from './components/EditBlogPage';
 function App() {
   return (
     <Router>
@@ -22,6 +23,7 @@ function App() {
           <Route path='/create' element={<CreatePage />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/blog/:id' element={<BlogPage />} />
+          <Route path='/edit/:id' element={<EditBlogPage />} />
         </Routes>
       </AuthProvider>
     </Router>

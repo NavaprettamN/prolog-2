@@ -59,7 +59,7 @@ const Home = () => {
             {/* Display user's blogs here */}
             {userBlogs.map(blog => (
                 <div key={blog._id} className="bg-white p-4 rounded shadow-md">
-                  <a href={`/blog/${blog._id}`} className="text-blue-500 hover:underline">{blog.title}</a>
+                  <a href={`/edit/${blog._id}`} className="text-blue-500 hover:underline">{blog.title}</a>
                   <p className="text-gray-600">{blog.content}</p>
                 </div>
               ))}

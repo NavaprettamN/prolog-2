@@ -22,15 +22,17 @@ const BlogPage = () => {
     }, [id]);
   
     return (
-      <div>
-        {blog && (
-          <div>
-            <h2>{blog.title}</h2>
-            <p>{blog.content}</p>
-            <p>Written by: {username}</p>
+      <div className="container mx-auto py-8">
+      {blog && (
+        <div className="bg-white p-8 rounded shadow-md">
+          <div className="flex flex-col items-center">
+            <h2 className="text-2xl font-bold mb-4 text-center">{blog.title}</h2>
+            <p className="text-gray-600 mb-4">{blog.content}</p>
+            <p className="text-gray-500 text-left">Written by: {username}</p>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
     );
   };
 

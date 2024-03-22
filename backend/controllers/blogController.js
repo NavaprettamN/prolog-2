@@ -14,16 +14,24 @@ const createBlog = async (req, res) => {
 }
 
 const updateBlog = async (req, res) => {
-    const {blogId} = req.body;
+    const { blogId } = req.params;
+    console.log(blogId);
+    const { title, content, lastPostedAt } = req.body;
     try {
         const existingBlog = await blogData.findOne({_id: blogId});
-        if(existingBlog) {
-            const updatedBlog = await blogData.updateOne({_id: existingBlog._id, title, content, frequency, userId, lastPostedAt});
+        if (existingBlog) {
+            existingBlog.title = title;
+            existingBlog.content = content;
+            existingBlog.lastPostedAt = lastPostedAt || Date.now();
+            await existingBlog.save();
+            res.status(200).json({ 'message': 'updated new blog' });
+        } 
+        else {
+            res.send("something is wrong");
         }
-        res.status(200).json({'message': 'created new blog'});
     }
     catch (err){
-        res.json({'message': 'the blog was not created'});
+        res.json({'message': 'the blog was not updated'});
     }
 }
 
