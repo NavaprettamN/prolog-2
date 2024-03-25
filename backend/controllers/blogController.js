@@ -6,6 +6,9 @@ const createBlog = async (req, res) => {
     const {title, content, frequency, userId, lastPostedAt} = req.body;
     try {
         const newBlog = await blogData.create({title, content, frequency, userId, lastPostedAt});
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
         res.status(200).json({'message': 'created new blog'});
     }
     catch (err){
@@ -27,6 +30,9 @@ const updateBlog = async (req, res) => {
             res.status(200).json({ 'message': 'updated new blog' });
         } 
         else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
             res.send("something is wrong");
         }
     }
@@ -38,6 +44,9 @@ const updateBlog = async (req, res) => {
 const getBlog = async (req, res) => {
     try {
         const blogs = await blogData.find();
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
         res.status(200).json(blogs);
     } catch (error) {
         console.error('Error fetching blogs:', error);
@@ -48,6 +57,9 @@ const getBlog = async (req, res) => {
 const getUserBlog = async (req, res) => {
     try {
         const userblogs = await blogData.find({userId: req.userId});
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
         res.status(200).json(userblogs);
     }
     catch (err) {
@@ -65,7 +77,9 @@ const getBlogData = async (req, res) => {
         }
         const userId = blog.userId;
         const user = await userData.findById(userId);
-
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
         res.status(200).json({blog, username: user.name });
     }
     catch (err) {
