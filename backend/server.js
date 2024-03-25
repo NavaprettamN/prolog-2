@@ -18,6 +18,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+    console.log("the get is working....");
+}
+);
 // dbconnect (can be in a separate file)
 mongoose.connect(process.env.URI)
 .then(() => {
