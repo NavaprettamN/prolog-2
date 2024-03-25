@@ -8,10 +8,12 @@ const userRouter = require('./routes/userRouter');
 const blogRouter = require('./routes/blogRoutes');
 const cors = require('cors');
 
+// For hosting use this : https://prolog-2-host.vercel.app 
+
 // initialize
 const app = express();
 dotenv.config();
-app.use(cors({origin:"https://prolog-2-host.vercel.app", credentials: true}));
+app.use(cors({origin:"https://prolog-2-host.vercel.app", methods: ['POST', 'GET'],credentials: true}));
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());

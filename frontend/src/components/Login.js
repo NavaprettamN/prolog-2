@@ -2,7 +2,7 @@ import React, {useContext ,useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import axios from 'axios';
-
+import { URL, local_url } from './url';
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const Login = () => {
 
       try {
         // Perform login logic (e.g., make API request)
-        const response = await axios.post('http://localhost:5000/login', {email, password}, 
+        const response = await axios.post(`${URL}/login`, {email, password}, 
           {withCredentials : true}
         );
         console.log(response)

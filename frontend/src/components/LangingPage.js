@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from './NavBar'
+import { URL, local_url } from './url';
 
 const LangingPage = () => {
   return (

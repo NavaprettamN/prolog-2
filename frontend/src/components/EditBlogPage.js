@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-
+import { URL, local_url } from './url';
 const EditBlogPage = () => {
 
   const { id } = useParams();
@@ -15,7 +15,7 @@ const EditBlogPage = () => {
   const fetchData = async () => {
     try {
 
-      const res = await axios.get(`http://localhost:5000/blog/${id}`, {withCredentials: true});
+      const res = await axios.get(`${URL}/blog/${id}`, {withCredentials: true});
       const {blog} = res.data;
       setTitle(blog.title);
       setContent(blog.content);
@@ -28,7 +28,7 @@ const EditBlogPage = () => {
     e.preventDefault();
     // console.log(id);
     try {
-      const res = await axios.put(`http://localhost:5000/updateblog/${id}`, {title, content, lastPostedAt: Date.now()}, {withCredentials: true})
+      const res = await axios.put(`${URL}/updateblog/${id}`, {title, content, lastPostedAt: Date.now()}, {withCredentials: true})
       console.log("the update worked? : ", res);
     }
     catch (err) {

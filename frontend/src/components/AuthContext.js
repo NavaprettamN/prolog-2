@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { URL, local_url } from './url';
 const AuthContext = createContext();
+URL
 
 export const AuthProvider = ({ children }) => {
     const [authenticated, setAuthenticated] = useState(false);
@@ -14,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuthentication = async () => {
         console.log("Checking authentication...");
         try {
-          const res = await axios.get('http://localhost:5000/getuser', {
+          const res = await axios.get(`${URL}/getuser`, {
             withCredentials: true,
           });
             if (res.status == 200) {

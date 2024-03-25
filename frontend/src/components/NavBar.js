@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import axios from 'axios';
+import { URL, local_url } from './url';
 
 const NavBar = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const NavBar = () => {
 
     const handleLogout = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/logout', {withCredentials: true});
+            const res = await axios.get(`{URL}/logout`, {withCredentials: true});
             if(res.status == 200) {
                 console.log('cookie deleted');
                 auth.checkAuthentication();

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useAuth } from './AuthContext'
 import axios from 'axios';
 import NavBar from './NavBar';
-
+import { URL, local_url } from './url';
 const Home = () => {
   
   const [blogs, setBlogs] = useState([]);
@@ -17,7 +17,7 @@ const Home = () => {
 
   const getBLogs = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/allblogs');
+      const res = await axios.get(`${URL}/allblogs`);
       setBlogs(res.data);
     }
     catch(err) {
@@ -27,7 +27,7 @@ const Home = () => {
 
   const userBlog = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/getuserblog', {withCredentials: true});
+      const res = await axios.get(`${URL}/getuserblog`, {withCredentials: true});
       setUserBlogs(res.data);
     }
     catch(err) {

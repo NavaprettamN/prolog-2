@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import { URL, local_url } from './url';
 
 const CreatePage = () => {
     const [title, setTitle] = useState('');
@@ -13,7 +14,7 @@ const CreatePage = () => {
         e.preventDefault();
         try {
             // Send a POST request to your backend API to create the blog
-            const response = await axios.post('http://localhost:5000/createblog', {title, content, frequency, userId : auth.userId, lastPostedAt: Date.now()}, 
+            const response = await axios.post(`${URL}/createblog`, {title, content, frequency, userId : auth.userId, lastPostedAt: Date.now()}, 
             {withCredentials: true});
             if (response.status == 200) {
                 // Blog created successfully, redirect to the dashboard or another page

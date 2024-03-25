@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { URL, local_url } from './url';
 
 const BlogPage = () => {
     const { id } = useParams();
@@ -10,7 +11,7 @@ const BlogPage = () => {
     useEffect(() => {
       const fetchBlogDetails = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/blog/${id}`, {withCredentials: true});
+          const response = await axios.get(`${URL}/blog/${id}`, {withCredentials: true});
           console.log(response);
           setBlog(response.data.blog);
           setUsername(response.data.username);

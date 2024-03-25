@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
         if(err) res.status(403);
         else {
             req.userId = data.userId;
-            next();  
+            next();
         }
     });
 }
