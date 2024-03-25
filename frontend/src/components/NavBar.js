@@ -14,7 +14,7 @@ const NavBar = () => {
 
     const handleLogout = async () => {
         try {
-            const res = await axios.get(`{URL}/logout`, {withCredentials: true});
+            const res = await axios.get(`${URL}/logout`, {withCredentials: true});
             if(res.status == 200) {
                 console.log('cookie deleted');
                 auth.checkAuthentication();
