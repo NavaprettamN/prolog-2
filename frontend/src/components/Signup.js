@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { URL, local_url } from './url';
-import { URL, local_url } from './url';
 const Signup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
